@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="vtk">
+    <CLASSES>
+      <root url="jar://D:/vtk/1vtk7.1.1/bin/vtk.jar!/" />
+      <root url="jar://D:/gdal/release-1800-x64-gdal-2-2-1-mapserver-7-0-6/bin/gdal/java/gdal.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://D:/vtk/1vtk7.1.1/bin/vtk.jar!/" />
+    </SOURCES>
+  </library>
+</component>

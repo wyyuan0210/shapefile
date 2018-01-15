@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="gdal">
+    <CLASSES>
+      <root url="jar://D:/gdal/release-1800-x64-gdal-2-2-1-mapserver-7-0-6/bin/gdal/java/gdal.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

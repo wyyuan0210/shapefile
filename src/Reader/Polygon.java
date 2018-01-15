@@ -9,12 +9,14 @@ import org.gdal.ogr.Geometry;
 import org.gdal.ogr.Layer;
 import org.gdal.ogr.ogr;
 import org.gdal.ogr.Driver;
+import vtk.*;
 
 
 public class Polygon {
+
     public static void main(String[] args) {
         ogr.RegisterAll();
-        String strVectorFile = "D:\\gdal\\examples\\City\\Capitals.shp";
+        String strVectorFile = "D:\\gdal\\examples\\City\\lines.shp";
 
         gdal.SetConfigOption("GDAL_FILENAME_IS_UTF8", "YES");
         gdal.SetConfigOption("SHAPE_ENCODING", "CP936");
@@ -26,15 +28,9 @@ public class Polygon {
         }
         System.out.println("打开文件【" + strVectorFile + "】成功！");
 
-        // 获取图层个数
-        int iLayerCount = ds.GetLayerCount();
-
         // 获取第一个图层
         Layer oLayer = ds.GetLayerByIndex(0);
-        if (oLayer == null) {
-            System.out.println("获取图层失败！\n");
-            return;
-        }
+
         // 对图层进行初始化
         oLayer.ResetReading();
 
@@ -74,15 +70,43 @@ public class Polygon {
                         break;
                 }
             }
+            // 获取要素中的几何信息
+            Geometry oGeometry=oFeature.GetGeometryRef();
+            if (oGeometry!=null){
+                if (oGeometry.GetGeometryType()==ogr.wkbPoint){
+                    System.out.println("点数据坐标：\n"+oGeometry.GetX()+" "+oGeometry.GetY());
+                }
+                else if (oGeometry.GetGeometryType()==ogr.wkbLineString){
+                    double longs;
+                    longs=oGeometry.Length();
+                    System.out.println("长度："+" "+longs);
+                    for (int i=0;i<oGeometry.GetPointCount();i++)
+                    {
+                        double x=oGeometry.GetX(i);
+                        double y=oGeometry.GetY(i);
+                        System.out.println("节点:"+x+" "+y);
+                    }
+                }
+                else if (oGeometry.GetGeometryType()==ogr.wkbPolygon){
+                    double area;
+                    area=oGeometry.GetArea();
+                    System.out.println("面积："+" "+area);
+                    System.out.println(oGeometry.ExportToWkt());
+                    /*for (int i=0;i<oGeometry.GetGeometryCount();i++){
+                       oGeometry.GetGeometryRef(i);
+                    }*/
+                }
+            }
+            else{
+                System.out.println("没有几何要素\n");
+            }
+            //break;
         }
+        System.out.println("数据集关闭！");
 
-        Geometry ogeometry=oFeature.GetGeometryRef();
-        if (ogeometry!=null){
-
-        }
-            System.out.println("没有数据！\n");
 
 
     }
+
 }
 

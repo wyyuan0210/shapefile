@@ -7,5 +7,7 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" name="vtk" level="project" />
+    <orderEntry type="library" name="gdal" level="project" />
   </component>
 </module>
